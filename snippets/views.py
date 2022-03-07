@@ -168,3 +168,13 @@ class SnippetDetailsUsingMixins(
 
     def delete(self, request, *args, **kwargs):
         return self.remove(request, *args, **kwargs)
+
+
+class SnippetListUsingGenericCBV(generics.ListCreateAPIView):
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+
+
+class SnippetDetailsUsingGenericCBV(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
