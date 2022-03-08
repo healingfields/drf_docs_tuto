@@ -29,16 +29,20 @@ urlpatterns = [
     #     "snippets/<int:pk>/", SnippetDetailsUsingCBV.as_view(), name="snippet_details"
     # ),
     # using generic CBV
-    path("snippets/", SnippetListUsingGenericCBV.as_view(), name="snippet_list"),
+    path("snippets/", SnippetListUsingGenericCBV.as_view(), name="snippet-list"),
     path(
         "snippets/<int:pk>/",
         SnippetDetailsUsingGenericCBV.as_view(),
-        name="snippet_details",
+        name="snippet-detail",
     ),
-    path("users/", UserList.as_view(), name="user_list"),
-    path("users/<int:pk>/", UserDetails.as_view(), name="user_details"),
+    path("users/", UserList.as_view(), name="user-list"),
+    path("users/<int:pk>/", UserDetails.as_view(), name="user-detail"),
     path("", api_root),
-    path("snippets/<int:pk>/highlight/", SnippetHighlight.as_view()),
+    path(
+        "snippets/<int:pk>/highlight/",
+        SnippetHighlight.as_view(),
+        name="snippet-highlight",
+    ),
 ]
 
 
