@@ -203,8 +203,8 @@ class UserDetails(generics.RetrieveAPIView):
 def api_root(request, format=None):
     return Response(
         {
-            "users": reverse("user_list", request=request, format=format),
-            "snippets": reverse("snippet_list", request=request, format=format),
+            "users": reverse("user-list", request=request, format=format),
+            "snippets": reverse("snippet-list", request=request, format=format),
         }
     )
 
