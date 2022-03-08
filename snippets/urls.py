@@ -1,10 +1,12 @@
 from django.urls import path
 from .views import (
     SnippetDetailsUsingGenericCBV,
+    SnippetHighlight,
     SnippetLisUsingCBV,
     SnippetListUsingGenericCBV,
     UserDetails,
     UserList,
+    api_root,
     snippet_details,
     snippet_details_using_decorator,
     snippet_list,
@@ -35,6 +37,8 @@ urlpatterns = [
     ),
     path("users/", UserList.as_view(), name="user_list"),
     path("users/<int:pk>/", UserDetails.as_view(), name="user_details"),
+    path("", api_root),
+    path("snippets/<int:pk>/highlight/", SnippetHighlight.as_view()),
 ]
 
 
