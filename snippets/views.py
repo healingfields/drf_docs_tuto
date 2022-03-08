@@ -21,7 +21,8 @@ from rest_framework.views import APIView
 from rest_framework import mixins
 from rest_framework import generics
 from rest_framework import permissions
-
+from rest_framework.reverse import reverse
+from rest_framework import renderers
 
 # Create your views here.
 @csrf_exempt
@@ -196,3 +197,22 @@ class UserList(generics.ListAPIView):
 class UserDetails(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+@api_view(["GET"])
+def api_root(request, format=None):
+    return Response(
+        {
+            "users": reverse("user_list", request=request, format=format),
+            "snippets": reverse("snippet_list", request=request, format=format),
+        }
+    )
+
+
+class SnippetHighlight(generics.GenericAPIView):
+    queryset = Snippet.objects.all()
+    renderer_classes = [renderers.StaticHTMLRenderer]
+
+    def get(self, request, *args, **kwargs):
+        snippet = self.get_object()
+        return Response(snippet.highlighted)
